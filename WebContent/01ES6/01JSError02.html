@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01JSError01</title>
+    <script>
+        /*
+            2-1) var키워드를 통해 변수를 선언하면 해당 변수는 호이스팅(hoisting)
+            된다. 호이스팅이랑 정의된 변수가 해당 스코프의 최상단으로 끌어올려지는 
+            것을 말한다.
+        */
+       console.log('변수 x 선언전='+ x);/*
+                아래에서 변수를 선언하면 undefined이 출력됨.
+                만약 주석처리하면 에러가 발생하여 더이상 실행되지 않음.
+            */
+       var x = 10;
+       console.log('변수 x 선언후='+ x);
+   
+       /*
+            2-2) 변수가 정의된 시점보다 변수에 값을 먼저 할당하는것이 가능하다.
+            var로 선언된 변수가 호이스팅 되기 때문에 발생하는 현상이다.
+       */
+       console.log('y(변수 정의전)='+ y);
+       y=100;
+       console.log('y(변수 정의후)='+ y);
+       var y = 200;
+
+       /*
+            2-3) var로 선언한 변수는 재정의가 가능하다.
+       */
+       var z = 99;
+       var z = 199; // 일반적인 언어에서는 에러이나, ESS에서는 정상동작함.
+       console.log('z='+ z);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

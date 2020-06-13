@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>00BasicForm01</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{title}}></h2>
+    </div>
+    <script>
+        /*
+        뷰 인스턴스를 생성하여 el 속성과 data속성을 정의한다.
+        이 때 사용한 Vue가 생성된다.
+
+        el: 뷰 인스턴스가 표시될 지점(DOM요소)을 지정
+        data : 출력할 문자열을 지정
+        */
+        var vue = new Vue({
+            el : '#app',
+            data : {
+                title : 'Hello Vuejs'
+            }
+        });
+    </script>   
+</body>
+</html>
