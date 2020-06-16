@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13Event_von03.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    
+    <style>
+    </style>
+ 
+    <script>  
+        $(function(){
+            var vm = new Vue({
+                el:'#app',
+                data: {
+                    title:"v-on으로 장바구니 구현하기",
+                    pname:'', // 상품명
+                    price:0, // 가격
+                    cnt:0, // 갯수
+                    sum:0, // 가격*갯수
+                    total:0, // 장바구니 전체가격
+                    cartLists:[] // 상품객체를 저장할 배열
+                },
+                methods:{
+                    addCart:function(){
+                        // this.변수 : 해당 Vue인스턴스에서 선언한 모델데이터를 변수를 가리킴.
+                        this.sum = this.price * this.cnt;
+                        //  DTO객체처럼 배열에 저장하기 위한 상품 객체 생성
+                        var addItem = {
+                            pname:this.pname,
+                            price:this.price,
+                            cnt:this.cnt,
+                            sum:this.sum
+                        };
+
+                        /*
+                            push() : JS에서 배열에 객체 혹은 데이터를 추가할 때 사용함.
+                        */
+                        this.cartLists.push(addItem);
+
+                        this.total += this.sum;
+                        }
+                }                
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+        <p>
+            상품명 : <input type="text" v-model="pname"><br>
+            가격 : <input type="number" v-model="price" value="10000"><br>
+            갯수 : <input type="number" v-model="cnt" value="1"><br>
+            <input type="button" value="장바구니 담기" @click="addCart();">
+        </p>
+        
+        <h3>추가한 상품은 {{pname}}이고, 가격은 {{price*cnt}}입니다.</h3>
+        <table border='1'>
+            <tr>
+                <th>no</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>갯수</th>
+                <th>계</th>
+            </tr>
+            <!-- 사용자가 상품을 배열에 추가하면 실시간으로 리스팅 처리됨. -->
+            <tr v-for="(prod, idx) in cartLists">
+                <td>{{idx+1}}</td>
+                <td>{{prod.pname}}</td>
+                <td>{{prod.price}}</td>
+                <td>{{prod.cnt}}</td>
+                <td>{{prod.sum}}</td>
+            </tr>
+            <tr><td colspan="4">총비용</td><td>{{total}}</td></tr>
+        </table>
+    </div>
+</body>
+</html>
