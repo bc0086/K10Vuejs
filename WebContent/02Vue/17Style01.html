@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17Style01</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    <!--
+        CSS와 Vue에서의 스타일 선언차이
+        style => :style
+        background-color:red => {backgroundColor:'red'}
+        class => :class
+        class ="style1 style2" => :class={style1:true, style2:false}
+        ※ :(콜론) 앞에는 v-bind가 생략되있음
+    -->
+    <style>
+        .myStyle1 {border: dotted 4px blue; }
+        .myStyle2 {width:100px; height:100px; }
+    </style>
+
+    <script>  
+        $(function(){
+            var vue = new Vue({
+                el:'#app',
+                data: {
+                    title:"CSS와 Vuejs의 Style 선언차이",
+                    /* 
+                        style에서 사용하는 속성명을 그대로 사용하여 JSON개체를 만듬
+                     	이 경우 즉시 적용하는 것이 가능함.
+                    */
+                    myStyle3 : {
+                        width:'100px', height:"100px",
+                        backgroundColor:"purple",
+                        color:"yellow",
+                        fontSize:"2em"
+                    },
+                    myStyle4 : {width:"120px", height:"120px"},
+
+                    myStyle5 : {backgroundColor:"pink", color:"blue",
+                    fontSize:"1.5em"},
+
+                    /*
+                        style을 개별적으로 적용하기 위해 단순한 JSOM객체로 만듬.
+                        이 경우 개별적인 key를 통해 해당 속성값을 가져와서 사용함.
+                    */
+                    myStyle6 : { bc:"yellow", bo:"solid 1px red", wi:200, he:100 }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="app" >
+        <h2>{{title}}</h2>
+       
+        <h3>CSS로 적용하기</h3>
+        <div style="background-color: orange;" class="myStyle1
+        myStyle2"></div>
+
+        <h3>Vue로 적용하기</h3>
+        <div :style="{backgroundColor:'pink'}" :class="{myStyle1:true,
+            myStyle2:true}"></div>
+
+        <h3>모델데이터로 선언한 STYLE 적용하기</h3>
+        <h4>1개 적용</h4>
+        <div v-bind:style="myStyle3">1개 적용</div>
+        <!-- 
+            모델데이터를 style에 적용할 시 2개 이상인 경우에는 
+            배열형태로 적용한다.
+
+            1개인 경우에는 둘다 가능하다.
+        -->
+        <h4>2개 적용</h4>
+        <div v-bind:style="[myStyle4, myStyle5]">2개 적용</div>
+
+        <!-- 
+            단순한 JSON객체에서 각각의 value를 key를 통해 가져와서 출력한다.
+            단 크기의 경우에는 반드시 px와 같은 단위가 추가되어야한다.
+        -->
+        <h3>모델데이터를 개별적으로 적용하기</h3>
+        <div :style="{backgroundColor:myStyle6.bc, border:myStyle6.bo,
+            width:myStyle6.wi + 'px', height:myStyle6.he+'px'}">Box</div>
+    </div>
+</body>
+</html>

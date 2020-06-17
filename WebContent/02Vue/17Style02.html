@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17Style01</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    <!--
+        시나리오]
+            1. 화면 구성
+                3x3 테이블 만들기.
+                방향의 이벤트를 인식할 수 있는 input객체 선언...
+            2. 이벤트 함수 정의
+                1) keyup
+                2) e.keyCode을 확인(상하/좌우)해서.
+            3. cell의 style 속성값 변경처리
+    -->
+   
+    <script>  
+        $(function(){
+            var vue = new Vue({
+                el:'#app',
+                data: {
+                    title:"[퀴즈]상하좌우 방향 이벤트 적용하기",
+                    // 중간, 상, 좌, 우, 하 순서
+                    pos:['yellow','','','','']
+                },
+                methods:{
+                    go:function(e){
+                        // 버튼을 누를때마다 배열 초기화
+                        this.pos = new Array(5);
+                        // 눌려진 키보드의 키코드를 콘솔에 출력
+                        console.log("keyCode", e.keyCode);
+
+                        if(e.keyCode==37) this.pos[2] = "yellow"; // 좌
+                        if(e.keyCode==38) this.pos[1] = "yellow"; // 상
+                        if(e.keyCode==39) this.pos[3] = "yellow"; // 우
+                        if(e.keyCode==40) this.pos[4] = "yellow"; // 하
+                        if(e.keyCode==13) this.pos[0] = "yellow"; // Enter
+                    }
+                }
+            });
+        });
+    </script>
+    <style>     
+        td{width:33.3%; text-align: center;}  
+    </style>
+</head>
+
+<body>
+    <div id="app" >
+        <h2>{{title}}</h2>
+        <!--
+            input태그에 keyup이벤트를 연결하고 go() 함수를 호출함.
+            @ 대신 v-on으로도 사용가능.
+        -->
+        방향이벤트 : <input type="text" @keyup = "go">
+        <table width="200" height="200" border="1">
+            <tr>
+                <td>무</td>
+                <td :style="{backgroundColor:pos[1]}"></td>
+                <td>무</td>
+            </tr>
+
+            <tr>
+                <td :style="{backgroundColor:pos[2]}"></td>
+                <td :style="{backgroundColor:pos[0]}"></td>
+                <td :style="{backgroundColor:pos[3]}"></td>
+            </tr>
+
+            <tr>
+                <td>무</td>
+                <td :style="{backgroundColor:pos[4]}"></td>
+                <td>무</td>
+            </tr>
+        </table>
+    </div>        
+</body>
+</html>
