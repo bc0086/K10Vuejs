@@ -145,21 +145,77 @@
 			
 	- 이벤트에서만큼은 methods(함수)만 호출가능
 		(computed는 호출불가)
+	
+	- v-on:click="함수명" : 각 항목을 클릭할 때마다 true<->false로 토글시킴
+	
 		
-	※ push() : JS에서 배열에 객체 혹은 데이터를 추가할때 사용함.
+	※ JS에서 배열에 객체 혹은 데이터를 추가할때 push() 삭제시 splice()
 	
 	- v-on:contextmenu.prevent="함수명"
 		1. 전체화면에서 우클릭시, 호출할 함수 정의 (대게 우클릭 방지시 사용)
-		
+	
+	- v-on:이벤트명.once="함수명"
+		: 로딩된 화면에서 이벤트를 한번만 처리하는 함수
+	
 	- preventDefault()
 		: 요소객체가 가지고 있는 내장된 기능을 방지처리
 		a태그의 경우 페이지이동 처리가 되는것을 방지한다.
+		
+	- stopPropagation()
+		: tag계층간 이벤트전달 및 전달방지를 위한 처리 목적으로 사용.
+		현재 이벤트가 발생된 대상요소객체에만 해당함수 처리.
+		(포함관계에 있는 상위객체에는 전달x)
+		
+	- CSS와 V에서의 스타일 선언차이
+		style => :style
+        background-color:red => {backgroundColor:'red'}
+        class => :class
+        class="style1 style2...." => :class={style1:true, style2:false}
+        ※ :(콜론) 앞에는 v-bind가 생략되있음
+		
+	- 모델데이터를 style에 적용할 시 2개 이상인 경우에는 배열형태로 적용.
+       1개인 경우에는 둘 다 가능.
+	
+	- 마우스관련 이벤트
+		1. @mouseup.left : 마우스 왼클릭시. 
+	
+		2. @mouseup.right : 마우스 우클릭시.
+		
+		3. @mouseover.stop : 마우스를 올렸을때.
+		
+		4. @mouseout.stop : 마우스를 내렸을떄.
+		
+	- Vue에서 css속성과 model데이터의 연동
+		-> 모델데이터와 css속성값을 연동하면 동적인 화면처리가 가능
+		-> CSS의 기본형식을 JSON객체형식으로 변환하여 Vue에 적용
+		
+		클래스 적용형태]
+		:class = "{클래스명:true, 클래스면2:false}"
+		:class = "{클래스명:모델1, 클래스명2:모델2}"
+			v-model="모델1"
+			v-model="모델2"
+	
  
  
  
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ */
+
  
  
  
